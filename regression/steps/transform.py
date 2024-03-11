@@ -34,10 +34,14 @@ def transformer_fn():
     """
     import sklearn
 
+#    function_transformer_params = (
+#        {}
+#        if sklearn.__version__.startswith("1.0")
+#        else {"feature_names_out": "one-to-one"}
+#    )
+
     function_transformer_params = (
-        {}
-        if sklearn.__version__.startswith("1.0")
-        else {"feature_names_out": "one-to-one"}
+        {"feature_names_out": lambda x,y : ["trip_distance","pickup_zip","dropoff_zip","pickup_dow","pickup_hour","trip_duration"]}
     )
 
     return Pipeline(
@@ -52,12 +56,12 @@ def transformer_fn():
                     transformers=[
                         (
                             "hour_encoder",
-                            OneHotEncoder(categories="auto", sparse=False),
+                            OneHotEncoder(categories="auto", sparse_output=False),
                             ["pickup_hour"],
                         ),
                         (
                             "day_encoder",
-                            OneHotEncoder(categories="auto", sparse=False),
+                            OneHotEncoder(categories="auto", sparse_output=False),
                             ["pickup_dow"],
                         ),
                         (

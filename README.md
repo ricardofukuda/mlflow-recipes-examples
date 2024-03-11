@@ -1,3 +1,11 @@
+# Commands for local testing
+```
+mlflow recipes run --profile local
+mlflow models build-docker --model-uri "models:/taxi_fare_regressor/1" --name "taxi_fare_regressor"
+mlflow models serve -m "models:/taxi_fare_regressor/1" --port 5002
+```
+
+
 # MLflow Recipes Examples
 This repository contains example projects for the
 [MLflow Recipes](https://mlflow.org/docs/latest/recipes.html) (previously known as MLflow Pipelines).
