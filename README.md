@@ -3,6 +3,8 @@
 mlflow recipes run --profile local
 mlflow models build-docker --model-uri "models:/taxi_fare_regressor/1" --name "taxi_fare_regressor"
 mlflow models serve -m "models:/taxi_fare_regressor/1" --port 5002
+sudo docker run --rm --name taxi_fare_regressor -p=5002:8080 taxi_fare_regressor:latest
+curl -X POST http://localhost:5002/invocations
 ```
 
 
